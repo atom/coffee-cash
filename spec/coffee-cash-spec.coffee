@@ -7,6 +7,7 @@ describe "Coffee Cache", ->
     CoffeeCache.register(cachePath)
     expect(CoffeeCache.getCacheMisses()).toBe 0
     expect(CoffeeCache.getCacheHits()).toBe 0
+    expect(CoffeeCache.getCacheDirectory()).toBe cachePath
 
     sample = require('./fixtures/sample')
     expect(sample(2)).toBe 4

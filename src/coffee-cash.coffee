@@ -60,3 +60,5 @@ module.exports =
   getCacheMisses: -> stats.misses
 
   getCacheHits: -> stats.hits
+
+  getCacheDirectory: -> cacheDirectory
