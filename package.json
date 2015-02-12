@@ -2,7 +2,7 @@
   "name": "coffee-cash",
   "version": "0.3.0",
   "description": "CoffeeScript compile cache",
-  "main": "./lib/less-coffee",
+  "main": "./lib/coffee-cash",
   "scripts": {
     "prepublish": "grunt clean lint coffee",
     "test": "grunt test"
