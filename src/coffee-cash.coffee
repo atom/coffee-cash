@@ -49,9 +49,16 @@ requireCoffeeScript = (module, filePath) ->
   module._compile(js, filePath)
 
 exports.register = ->
-  require.extensions['.coffee'] = requireCoffeeScript
-  require.extensions['.litcoffee'] = requireCoffeeScript
-  require.extensions['.coffee.md'] = requireCoffeeScript
+  propertyConfig =
+    enumerable: true
+    value: requireCoffeeScript
+    writable: false
+
+  Object.defineProperty(require.extensions, '.coffee', propertyConfig)
+  Object.defineProperty(require.extensions, '.litcoffee', propertyConfig)
+  Object.defineProperty(require.extensions, '.coffee.md', propertyConfig)
+
+  return
 
 exports.getCacheMisses = -> stats.misses
 
