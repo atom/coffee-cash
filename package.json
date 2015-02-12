@@ -1,0 +1,37 @@
+{
+  "name": "coffee-cash",
+  "version": "0.0.0",
+  "description": "CoffeeScript compile cache",
+  "main": "./lib/less-coffee",
+  "scripts": {
+    "prepublish": "grunt clean lint coffee",
+    "test": "grunt test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/atom/coffee-cash.git"
+  },
+  "bugs": {
+    "url": "https://github.com/atom/coffee-cash/issues"
+  },
+  "homepage": "http://atom.github.io/coffee-cash",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://github.com/atom/coffee-cash/raw/master/LICENSE.md"
+    }
+  ],
+  "dependencies": {
+    "coffee-script": "^1.9.0",
+    "fs-plus": "^2.5.0"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-cli": "~0.1.9",
+    "grunt-coffeelint": "0.0.7",
+    "grunt-contrib-coffee": "~0.9.0",
+    "grunt-shell": "~0.3.1",
+    "jasmine-focused": "1.x",
+    "temp": "^0.8.1"
+  }
+}
