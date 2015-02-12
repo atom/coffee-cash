@@ -1,6 +1,6 @@
 {
   "name": "coffee-cash",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "CoffeeScript compile cache",
   "main": "./lib/less-coffee",
   "scripts": {
