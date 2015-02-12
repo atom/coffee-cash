@@ -1,4 +1,4 @@
-# Coffee Cash [![Build Status](https://travis-ci.org/atom/coffee-cash.png?branch=master)](https://travis-ci.org/atom/coffee-cash)
+# Coffee Cash [![Build Status](https://travis-ci.org/atom/coffee-cash.svg?branch=master)](https://travis-ci.org/atom/coffee-cash)
 
 Simple CoffeeScript caching based on a SHA-1 of the contents.
 
