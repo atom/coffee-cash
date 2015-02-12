@@ -52,10 +52,9 @@ module.exports =
   register: (newCacheDirectory) ->
     cacheDirectory = newCacheDirectory
 
-    extensionsProperty = {writable: false, value: requireCoffeeScript}
-    Object.defineProperty(require.extensions, '.coffee', extensionsProperty)
-    Object.defineProperty(require.extensions, '.litcoffee', extensionsProperty)
-    Object.defineProperty(require.extensions, '.coffee.md', extensionsProperty)
+    require.extensions['.coffee'] = requireCoffeeScript
+    require.extensions['.litcoffee'] = requireCoffeeScript
+    require.extensions['.coffee.md'] = requireCoffeeScript
 
   getCacheMisses: -> stats.misses
 
