@@ -12,7 +12,8 @@ npm install coffee-cash
 
 ```coffee
 CoffeeCache = require 'coffee-cash'
-CoffeeCache.register('/tmp/cache/coffee')
+CoffeeCache.setCacheDirectory('/tmp/cache/coffee')
+CoffeeCache.register()
 
 # CoffeeScript is now registered so you can require .coffee files
 # and they will be automatically use cached JavaScript when available

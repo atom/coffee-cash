@@ -48,16 +48,27 @@ requireCoffeeScript = (module, filePath) ->
   js = getCachedJavaScript(cachePath) ? compileCoffeeScript(coffee, filePath, cachePath)
   module._compile(js, filePath)
 
-module.exports =
-  register: (newCacheDirectory) ->
-    cacheDirectory = newCacheDirectory
+exports.register = ->
+  require.extensions['.coffee'] = requireCoffeeScript
+  require.extensions['.litcoffee'] = requireCoffeeScript
+  require.extensions['.coffee.md'] = requireCoffeeScript
 
-    require.extensions['.coffee'] = requireCoffeeScript
-    require.extensions['.litcoffee'] = requireCoffeeScript
-    require.extensions['.coffee.md'] = requireCoffeeScript
+exports.getCacheMisses = -> stats.misses
 
-  getCacheMisses: -> stats.misses
+exports.getCacheHits = -> stats.hits
 
-  getCacheHits: -> stats.hits
+exports.resetCacheStats = ->
+  stats =
+    hits: 0
+    misses: 0
 
-  getCacheDirectory: -> cacheDirectory
+exports.setCacheDirectory = (newCacheDirectory) ->
+  cacheDirectory = newCacheDirectory
+
+exports.getCacheDirectory = -> cacheDirectory
+
+exports.addPathToCache = (filePath) ->
+  coffee = fs.readFileSync(filePath, 'utf8')
+  cachePath = getCachePath(coffee)
+  compileCoffeeScript(coffee, filePath, cachePath)
+  return
