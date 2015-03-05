@@ -42,7 +42,8 @@ describe "Coffee Cache", ->
     catch error
       caughtError = error
     expect(caughtError.message).toBe 'hello world'
-    expect(-> error.stack).not.toThrow()
+    expect(-> caughtError.stack).not.toThrow()
+    expect(caughtError.stack.toString()).toContain(filePath)
 
   describe "addPathToCache", ->
     it "compiles the file and caches it", ->
