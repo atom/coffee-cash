@@ -30,7 +30,7 @@ describe "Coffee Cache", ->
     expect(CoffeeCache.getCacheMisses()).toBe 1
     expect(CoffeeCache.getCacheHits()).toBe 1
 
-  it "prevents errors from being thrown by CoffeeScript's Error.prepareStackTrace override", ->
+  it "prevents errors from being thrown by CoffeeScript's Error.prepareStackTrace", ->
     filePath = path.join(temp.mkdirSync(), 'file.coffee')
     fs.writeFileSync filePath, "module.exports = -> throw new Error('hello world')"
     throwsAnError = require(filePath)
