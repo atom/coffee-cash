@@ -26,8 +26,22 @@ convertFilePath = (filePath) ->
     filePath = "/#{path.resolve(filePath).replace(/\\/g, '/')}"
   encodeURI(filePath)
 
+loadCoffeeScript = ->
+  coffee = require 'coffee-script'
+
+  # Work around for https://github.com/jashkenas/coffeescript/issues/3890
+  coffeePrepareStackTrace = Error.prepareStackTrace
+  if coffeePrepareStackTrace?
+    Error.prepareStackTrace = (error, stack) ->
+      try
+        return coffeePrepareStackTrace(error, stack)
+      catch coffeeError
+        return stack
+
+  coffee
+
 compileCoffeeScript = (coffee, filePath, cachePath) ->
-  CoffeeScript ?= require 'coffee-script'
+  CoffeeScript ?= loadCoffeeScript()
   {js, v3SourceMap} = CoffeeScript.compile(coffee, filename: filePath, sourceMap: true)
   stats.misses++
 
