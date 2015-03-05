@@ -1,6 +1,9 @@
+fs = require 'fs'
 path = require 'path'
 temp = require 'temp'
 CoffeeCache = require '../src/coffee-cash'
+
+temp.track()
 
 describe "Coffee Cache", ->
   cachePath = null
@@ -26,6 +29,21 @@ describe "Coffee Cache", ->
     expect(duplicateSample(2)).toBe 4
     expect(CoffeeCache.getCacheMisses()).toBe 1
     expect(CoffeeCache.getCacheHits()).toBe 1
+
+  it "prevents errors from being thrown by CoffeeScript's Error.prepareStackTrace", ->
+    filePath = path.join(temp.mkdirSync(), 'file.coffee')
+    fs.writeFileSync filePath, "module.exports = -> throw new Error('hello world')"
+    throwsAnError = require(filePath)
+    fs.unlinkSync(filePath)
+
+    caughtError = null
+    try
+      throwsAnError()
+    catch error
+      caughtError = error
+    expect(caughtError.message).toBe 'hello world'
+    expect(-> caughtError.stack).not.toThrow()
+    expect(caughtError.stack.toString()).toContain(filePath)
 
   describe "addPathToCache", ->
     it "compiles the file and caches it", ->
