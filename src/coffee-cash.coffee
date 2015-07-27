@@ -42,7 +42,10 @@ loadCoffeeScript = ->
 
 compileCoffeeScript = (coffee, filePath, cachePath) ->
   CoffeeScript ?= loadCoffeeScript()
-  {js, v3SourceMap} = CoffeeScript.compile(coffee, filename: filePath, sourceMap: true)
+  {js, v3SourceMap} = CoffeeScript.compile coffee,
+    filename: filePath
+    sourceMap: true
+    literate: ///\.(litcoffee|coffee.md)$///.test(filePath)
   stats.misses++
 
   if btoa? and unescape? and encodeURIComponent?
