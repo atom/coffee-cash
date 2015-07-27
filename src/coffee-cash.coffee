@@ -42,7 +42,11 @@ loadCoffeeScript = ->
 
 compileCoffeeScript = (coffee, filePath, cachePath) ->
   CoffeeScript ?= loadCoffeeScript()
-  {js, v3SourceMap} = CoffeeScript.compile(coffee, filename: filePath, sourceMap: true)
+  compileOptions =
+    filename: filePath
+    literate: isLiterate(filePath)
+    sourceMap: true
+  {js, v3SourceMap} = CoffeeScript.compile(coffee, compileOptions)
   stats.misses++
 
   if btoa? and unescape? and encodeURIComponent?
@@ -55,6 +59,8 @@ compileCoffeeScript = (coffee, filePath, cachePath) ->
   try
     fs.writeFileSync(cachePath, js)
   js
+
+isLiterate = (filePath) -> path.extname(filePath) in ['.litcoffee', '.md']
 
 requireCoffeeScript = (module, filePath) ->
   coffee = fs.readFileSync(filePath, 'utf8')

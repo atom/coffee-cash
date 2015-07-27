@@ -30,6 +30,23 @@ describe "Coffee Cache", ->
     expect(CoffeeCache.getCacheMisses()).toBe 1
     expect(CoffeeCache.getCacheHits()).toBe 1
 
+  it "caches the compiled literate CoffeeScript", ->
+    sample = require('./fixtures/sample.litcoffee')
+    expect(sample(10)).toBe 20
+    expect(CoffeeCache.getCacheMisses()).toBe 1
+    expect(CoffeeCache.getCacheHits()).toBe 0
+
+    duplicateSample = require('./fixtures/duplicate.litcoffee')
+    expect(duplicateSample).not.toBe sample
+    expect(duplicateSample(10)).toBe 20
+    expect(CoffeeCache.getCacheMisses()).toBe 1
+    expect(CoffeeCache.getCacheHits()).toBe 1
+
+    sample = require('./fixtures/sample.coffee.md')
+    expect(sample(10)).toBe 8
+    expect(CoffeeCache.getCacheMisses()).toBe 2
+    expect(CoffeeCache.getCacheHits()).toBe 1
+
   it "prevents errors from being thrown by CoffeeScript's Error.prepareStackTrace", ->
     filePath = path.join(temp.mkdirSync(), 'file.coffee')
     fs.writeFileSync filePath, "module.exports = -> throw new Error('hello world')"
