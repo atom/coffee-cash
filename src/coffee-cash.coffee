@@ -1,8 +1,8 @@
 crypto = require 'crypto'
+fs = require 'fs'
 path = require 'path'
 
 CoffeeScript = null # defer until used
-fs = require 'fs-plus'
 
 stats =
   hits: 0
@@ -14,7 +14,7 @@ getCachePath = (coffee) ->
   path.join(cacheDirectory, "#{digest}.js")
 
 getCachedJavaScript = (cachePath) ->
-  if fs.isFileSync(cachePath)
+  if (try fs.statSync(cachePath).isFile())
     try
       cachedJavaScript = fs.readFileSync(cachePath, 'utf8')
       stats.hits++
