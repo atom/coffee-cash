@@ -1,4 +1,5 @@
-# Coffee Cash [![Build Status](https://travis-ci.org/atom/coffee-cash.svg?branch=master)](https://travis-ci.org/atom/coffee-cash)
+##### Atom and all repositories under Atom will be archived on December 15, 2022. Learn more in our [official announcement](https://github.blog/2022-06-08-sunsetting-atom/)
+ # Coffee Cash [![Build Status](https://travis-ci.org/atom/coffee-cash.svg?branch=master)](https://travis-ci.org/atom/coffee-cash)
 
 Simple CoffeeScript caching based on a SHA-1 of the contents.
 
